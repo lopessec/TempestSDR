@@ -27,7 +27,7 @@ else
 endif
 
 # Headers
-INC += "$(JAVA_HOME)/include" "$(JAVA_HOME)/include/win32"
+INC += "$(JAVA_HOME)/include" "$(JAVA_HOME)/include/win32" "$(JAVA_HOME)/include/linux" "$(JAVA_HOME)/include/darwin"
 
 # Discover the library extension for each OS
 ifeq ($(OS),Windows_NT)
@@ -67,14 +67,14 @@ else
 
 	ifndef $(ARCHNAME)
 
-		UNAME_P := $(shell uname -p)
-		ifeq ($(UNAME_P),x86_64)
+		UNAME_M := $(shell uname -m)
+		ifeq ($(UNAME_M),x86_64)
 			ARCHNAME = X64
 		endif
-		ifneq ($(filter %86,$(UNAME_P)),)
+		ifneq ($(filter %86,$(UNAME_M)),)
 			ARCHNAME = X86
 		endif
-		ifneq ($(filter arm%,$(UNAME_P)),)
+		ifneq ($(filter arm%,$(UNAME_M)),)
 			ARCHNAME = ARM
 		endif
 
